@@ -8,8 +8,6 @@ categories:
 
 [List of Unix commands](https://en.wikipedia.org/wiki/List_of_Unix_commands)
 
-<!--more-->
-
 `man`: 某个命令的手册
 
 `ls`: 列出目录，`ls -al`
