@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/11/29/Linux常用命令/index.html">
 <meta property="og:site_name" content="RoboCoder">
 <meta property="og:description" content="List of Unix commands">
-<meta property="og:updated_time" content="2016-11-29T04:38:33.976Z">
+<meta property="og:updated_time" content="2016-11-30T15:08:54.225Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用命令">
 <meta name="twitter:description" content="List of Unix commands">
@@ -350,6 +350,35 @@
 
       
         <p><a href="https://en.wikipedia.org/wiki/List_of_Unix_commands" target="_blank" rel="external">List of Unix commands</a></p>
+<a id="more"></a>
+<p><code>man</code>: 某个命令的手册</p>
+<p><code>ls</code>: 列出目录，<code>ls -al</code></p>
+<p><code>cd</code>: 到某一目录</p>
+<p><code>pwd</code>： 当前目录</p>
+<p><code>mkdir</code>: 新建目录，<code>mkdir -p</code></p>
+<p><code>rm</code>: 删除文件或目录，<code>rm -rf</code></p>
+<p><code>cp</code>: 复制，<code>cp -r</code></p>
+<p><code>mv</code>: 重命名，如果存在该目录则移动</p>
+<p><code>touch</code>: 新建文件</p>
+<p><code>cat</code>: 内容输出到标准输出显示，或者<code>cat &gt;</code>标准输入输入到某一文件</p>
+<p><code>more</code>: 显示文件内容，<code>空格</code>向下滚动一屏，<code>q</code>退出</p>
+<p><code>ll</code>: 列出文件和目录的详细信息（包括隐藏文件），<code>ls -al</code>不会显示隐藏文件</p>
+<p><code>ps</code>: 显示进程，<code>ps -rf | grep xxx</code>显示所有进程中带有关键字xxx的进程</p>
+<p><code>top</code>: 显示实时的系统性能</p>
+<p><code>kill</code>: 杀死某一进程号的进程</p>
+<p><code>chmod</code>: 修改权限信息，read，write，execute，user，group，other</p>
+<p><code>ssh</code> <em><code>user@host</code></em>: ssh访问主机</p>
+<p><code>grep</code>: 搜索</p>
+<p><code>find</code>: 搜索</p>
+<p><code>locate</code>: 在保存文档和目录名称的数据库内搜索，<code>locate -u</code></p>
+<p><code>whereis</code>: 搜索程序</p>
+<p><code>which</code>: 在PATH变量指定的路径中，搜索某个系统命令的位置</p>
+<p><code>tar cf</code> <em><code>file.tar files</code></em>: 备份</p>
+<p><code>tar xf</code> <em><code>file.tar</code></em>: 还原</p>
+<p><code>gzip</code> <em><code>file</code></em>: 压缩</p>
+<p><code>gzip -d</code> <em><code>file.gz</code></em>: 解压</p>
+<p><code>wget -c</code>: 断点下载</p>
+<p><code>dpkg -i</code> <em><code>pkg.deb</code></em>: 安装</p>
 
       
     </div>
@@ -382,8 +411,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/29/Atom/" rel="next" title="Atom的使用与配置">
-                <i class="fa fa-chevron-left"></i> Atom的使用与配置
+              <a href="/2016/11/29/Hexo/" rel="next" title="Hexo使用手册">
+                <i class="fa fa-chevron-left"></i> Hexo使用手册
               </a>
             
           </div>
@@ -392,8 +421,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/11/29/Hexo/" rel="prev" title="Hexo使用手册">
-                Hexo使用手册 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/11/29/定制Ubuntu主题/" rel="prev" title="定制Ubuntu主题">
+                定制Ubuntu主题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -457,7 +486,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
