@@ -265,3 +265,118 @@ cmake -DCMAKE_INSTALL_PREFIX=/tmp/t2/usr ..
 make
 make install
 ```
+
+## 静态库与动态库构建
+
+* 在`cmake/t3`目录下新建如下结构
+
+```bash
+.
+├── build
+├── CMakeLists.txt
+└── lib
+    ├── CMakeLists.txt
+    ├── hello.c
+    └── hello.h
+```
+
+* t3/CMakeLists.txt
+
+```cmake
+PROJECT(HELLOLIB)
+ADD_SUBDIRECTORY(lib)
+```
+
+* t3/lib/CMakeLists.txt
+
+```cmake
+SET(LIBHELLO_SRC hello.c)
+ADD_LIBRARY(hello SHARED ${LIBHELLO_SRC})
+ADD_LIBRARY(hello_static STATIC ${LIBHELLO_SRC})
+SET_TARGET_PROPERTIES(hello_static PROPERTIES OUTPUT_NAME "hello")
+GET_TARGET_PROPERTY(OUTPUT_VALUE hello_static OUTPUT_NAME)
+MESSAGE(STATUS "This is the hello_static OUTPUT_NAME:" ${OUTPUT_VALUE})
+SET_TARGET_PROPERTIES(hello PROPERTIES CLEAN_DIRECT_OUTPUT 1)
+SET_TARGET_PROPERTIES(hello_static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
+SET_TARGET_PROPERTIES(hello PROPERTIES VERSION 1.2 SOVERSION 1)
+INSTALL(TARGETS hello hello_static
+	LIBRARY DESTINATION lib
+	ARCHIVE DESTINATION lib)
+INSTALL(FILES hello.h DESTINATION include/hello)
+```
+
+* t3/lib/hello.c
+
+```c
+#include "hello.h"
+
+void HelloFunc(){
+	printf("Hello World\n");
+}
+```
+
+* t3/lib/hello.h
+
+```c
+#ifndef HELLO_H
+#define HELLO_H
+#include <stdio.h>
+void HelloFunc();
+#endif
+```
+
+```bash
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+make
+sudo make install
+```
+
+## 如何使用外部共享库和头文件
+
+* 在`cmake/t4`目录下新建如下结构
+
+```bash
+.
+├── build
+├── CMakeLists.txt
+└── src
+    ├── CMakeLists.txt
+    └── main.c
+```
+
+* t4/CMakeLists.txt
+
+```cmake
+PROJECT(NEWHELLO)
+ADD_SUBDIRECTORY(src)
+```
+
+* t4/src/CMakeLists.txt
+
+```cmake
+ADD_EXECUTABLE(main main.c)
+INCLUDE_DIRECTORIES(/usr/include/hello)
+TARGET_LINK_LIBRARIES(main libhello.so)
+```
+
+* t4/src/main.c
+
+```c
+#include <hello.h>
+
+int main(){
+	HelloFunc();
+	return 0;
+}
+```
+
+```bash
+cd build
+cmake ..
+make VERBOSE=1
+# 输出详细make信息
+./src/main
+ldd src/main
+# 查看链接情况
+```
