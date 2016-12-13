@@ -1,0 +1,935 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="RaspberryPi,OpenCV," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="Install guide: Raspberry Pi 3 + Raspbian Jessie + OpenCV 3 by Adrian Rosebrock">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Raspberry Pi 3 + Raspbian Jessie + OpenCV 3">
+<meta property="og:url" content="http://yoursite.com/2016/12/13/Raspberry Pi 3 + Raspbian Jessie + OpenCV 3/index.html">
+<meta property="og:site_name" content="RoboCoder">
+<meta property="og:description" content="Install guide: Raspberry Pi 3 + Raspbian Jessie + OpenCV 3 by Adrian Rosebrock">
+<meta property="og:updated_time" content="2016-12-13T10:06:54.093Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Raspberry Pi 3 + Raspbian Jessie + OpenCV 3">
+<meta name="twitter:description" content="Install guide: Raspberry Pi 3 + Raspbian Jessie + OpenCV 3 by Adrian Rosebrock">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/13/Raspberry Pi 3 + Raspbian Jessie + OpenCV 3/"/>
+
+
+
+
+
+  <title> Raspberry Pi 3 + Raspbian Jessie + OpenCV 3 | RoboCoder </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?988adeeed387deb1163635dd055a6603";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">RoboCoder</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/13/Raspberry Pi 3 + Raspbian Jessie + OpenCV 3/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Feng Han">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="RoboCoder">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="RoboCoder" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Raspberry Pi 3 + Raspbian Jessie + OpenCV 3
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/12/13/Raspberry Pi 3 + Raspbian Jessie + OpenCV 3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/13/Raspberry Pi 3 + Raspbian Jessie + OpenCV 3/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/13/Raspberry Pi 3 + Raspbian Jessie + OpenCV 3/" class="leancloud_visitors" data-flag-title="Raspberry Pi 3 + Raspbian Jessie + OpenCV 3">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">Visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://www.pyimagesearch.com/2016/04/18/install-guide-raspberry-pi-3-raspbian-jessie-opencv-3/" target="_blank" rel="external">Install guide: Raspberry Pi 3 + Raspbian Jessie + OpenCV 3 by Adrian Rosebrock</a></p>
+<a id="more"></a>
+<h2 id="扩展文件系统"><a href="#扩展文件系统" class="headerlink" title="扩展文件系统"></a>扩展文件系统</h2><pre><code>sudo raspi-config
+</code></pre><p>选择第一个选项<em>1. Expand File System</em>，回车键<em>Enter</em>，结束按钮<em>Finish</em>，然后重启树莓派</p>
+<pre><code>sudo reboot
+</code></pre><p>之后可以使用<code>df -h</code>命令查看SD卡的使用分配情况</p>
+<p>如果空间不足可以把系统中自带的Wolfram语言的环境卸载删除掉</p>
+<pre><code>sudo apt-get purge wolfram-engine
+</code></pre><h2 id="安装依赖环境"><a href="#安装依赖环境" class="headerlink" title="安装依赖环境"></a>安装依赖环境</h2><p>更新升级安装库</p>
+<pre><code>sudo apt-get update
+sudo apt-get upgrade
+</code></pre><p>安装开发工具，包括CMake等</p>
+<pre><code>sudo apt-get install build-essential cmake pkg-config
+</code></pre><p>接着，我们需要安装一些图像I/O包，使得我们可以加载多种格式的图片文件</p>
+<pre><code>sudo apt-get install libjpeg-dev libtiff5-dev libjasper-dev libpng12-dev
+</code></pre><p>国内的朋友如果有些包下不下来的话就换一下软件源，参考<a href="http://blog.csdn.net/xukai871105/article/details/38614541" target="_blank" rel="external">树莓派学习笔记——修改树莓派软件源</a></p>
+<p>安装视频I/O包</p>
+<pre><code>sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
+sudo apt-get install libxvidcore-dev libx264-dev
+</code></pre><p>OpenCv库的<code>highgui</code>模块需要依赖GTK开发库</p>
+<pre><code>sudo apt-get install libgtk2.0-dev
+</code></pre><p>一些OpenCv的运算可以通过一些扩展包增强</p>
+<pre><code>sudo apt-get install libatlas-base-dev gfortran
+</code></pre><p>安装Python 2.7和Python 3头文件</p>
+<pre><code>sudo apt-get install python2.7-dev python3-dev
+</code></pre><h2 id="下载OpenCv源码"><a href="#下载OpenCv源码" class="headerlink" title="下载OpenCv源码"></a>下载OpenCv源码</h2><pre><code>cd ~
+wget -O opencv.zip https://github.com/Itseez/opencv/archive/3.1.0.zip
+unzip opencv.zip
+</code></pre><p>为了能使用SIFT、SURF等这样的高级特性需要下载扩展包</p>
+<pre><code>wget -O opencv_contrib.zip https://github.com/Itseez/opencv_contrib/archive/3.1.0.zip
+unzip opencv_contrib.zip
+</code></pre><h2 id="Python-2-7或Python-2？"><a href="#Python-2-7或Python-2？" class="headerlink" title="Python 2.7或Python 2？"></a>Python 2.7或Python 2？</h2><p>Python包管理工具<code>pip</code></p>
+<pre><code>wget https://bootstrap.pypa.io/get-pip.py
+sudo python get-pip.py
+</code></pre><p>安装虚拟环境<code>virtualenv</code>和<code>virtualenvwrapper</code>，可以为不同的工作分离开不同的包版本</p>
+<pre><code>sudo pip install virtualenv virtualenvwrapper
+sudo rm -rf ~/.cache/pip
+</code></pre><p>将以下内容加入用户环境变量文件<code>~/.profile</code></p>
+<pre><code>sudo nano ~/.profile
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># virtualenv and virtualenvwrapper</div><div class="line">export WORKON_HOME=$HOME/.virtualenvs</div><div class="line">source /usr/local/bin/virtualenvwrapper.sh</div></pre></td></tr></table></figure>
+<p>通过<code>source</code>命令使<code>~/.profile</code>生效</p>
+<pre><code>source ~/.profile
+</code></pre><p>建立Python虚拟环境</p>
+<pre><code>mkvirtualenv cv -p python2
+</code></pre><p>通过以上这个命令建立了一个名字为<code>cv</code>的使用<em>Python 2.7</em>的虚拟环境</p>
+<p>如果你想使用<em>python 3</em>，可以使用下面这个命令：</p>
+<pre><code>mkvirtualenv cv -p python3
+</code></pre><blockquote>
+<p>Again, I can’t stress this point enough: the cv  Python virtual environment is entirely independent and sequestered from the default Python version included in the download of Raspbian Jessie. Any Python packages in the global site-packages  directory will not be available to the cv  virtual environment. Similarly, any Python packages installed in site-packages  of cv  will not be available to the global install of Python. Keep this in mind when you’re working in your Python virtual environment and it will help avoid a lot of confusion and headaches.</p>
+</blockquote>
+<p>如何确认是否在”cv”虚拟环境</p>
+<p>在命令行前面是否有<code>(cv)</code>，如果没有需要通过以下命令进入<code>cv</code>虚拟环境：</p>
+<pre><code>source ~/.profile
+workon cv
+</code></pre><p><strong>以下操作都是在<code>cv</code>虚拟环境下进行</strong></p>
+<p>安装NumPy包</p>
+<pre><code>pip install numpy
+</code></pre><h2 id="编译安装OpenCv"><a href="#编译安装OpenCv" class="headerlink" title="编译安装OpenCv"></a>编译安装OpenCv</h2><p>请先确认是否在<code>(cv)</code>虚拟环境下</p>
+<pre><code>cd ~/opencv-3.1.0/
+mkdir build
+cd build
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+    -D CMAKE_INSTALL_PREFIX=/usr/local \
+    -D INSTALL_PYTHON_EXAMPLES=ON \
+    -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib-3.1.0/modules \
+    -D BUILD_EXAMPLES=ON ..
+</code></pre><p>编译OpenCv</p>
+<pre><code>make -j4
+</code></pre><p><code>-j4</code>参数是树莓派3有4核，这样可以加快编译速度。</p>
+<p>但是，有时会出现编译出错的情况，那么建议通过以下命令重新开始编译，并且只使用1核。</p>
+<p><strong>强调是<code>make -j4</code>出错的情况下才从新使用以下命令从新开始</strong></p>
+<pre><code>make clean
+make
+</code></pre><p>编译过程会持续一个多小时。</p>
+<p>编译完成后安装OpenCv</p>
+<pre><code>sudo make install
+sudo ldconfig
+</code></pre><h2 id="安装最后"><a href="#安装最后" class="headerlink" title="安装最后"></a>安装最后</h2><p>使用的是Python 2.7的：</p>
+<p>通过以下命令查看OpenCv是否被安装到这个目录：</p>
+<pre><code>ls -l /usr/local/lib/python2.7/site-packages/
+total 1852
+-rw-r--r-- 1 root staff 1895772 Mar 20 20:00 cv2.so
+</code></pre><p>最后一步是为<code>cv</code>虚拟环境建立一个OpenCv的链接</p>
+<pre><code>cd ~/.virtualenvs/cv/lib/python2.7/site-packages/
+ln -s /usr/local/lib/python2.7/site-packages/cv2.so cv2.so
+</code></pre><p>使用的是Python 3的：</p>
+<p>通过以下命令查看OpenCv是否被安装到这个目录：</p>
+<pre><code>ls -l /usr/local/lib/python3.4/site-packages/
+total 1852
+-rw-r--r-- 1 root staff 1895932 Mar 20 21:51 cv2.cpython-34m.so
+</code></pre><p>不知道什么原因，在Python 3环境下编译出来的动态链接库的名字是<code>cv2.cpython-34m.so</code>，而不是<code>cv2.so</code>，不过我们可以通过重命名轻易的修改过来：</p>
+<pre><code>cd /usr/local/lib/python3.4/site-packages/
+sudo mv cv2.cpython-34m.so cv2.so
+</code></pre><p>最后一步是为<code>cv</code>虚拟环境建立一个OpenCv的链接</p>
+<pre><code>cd ~/.virtualenvs/cv/lib/python3.4/site-packages/
+ln -s /usr/local/lib/python3.4/site-packages/cv2.so cv2.so
+</code></pre><h2 id="验证是否安装正确"><a href="#验证是否安装正确" class="headerlink" title="验证是否安装正确"></a>验证是否安装正确</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">source</span> ~/.profile</div><div class="line">workon cv</div><div class="line">python</div><div class="line">&gt;&gt;&gt; import cv2</div><div class="line">&gt;&gt;&gt; cv2.__version__</div><div class="line"><span class="string">'3.1.0'</span></div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure>
+<p>当OpenCV安装结束后，可以将<code>opencv-3.1.0</code>和<code>opencv_contrib-3.1.0</code>目录删除来释放一些空间。</p>
+<pre><code>rm -rf opencv-3.1.0 opencv_contrib-3.1.0
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RaspberryPi/" rel="tag"># RaspberryPi</a>
+          
+            <a href="/tags/OpenCV/" rel="tag"># OpenCV</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/30/cmake make/" rel="next" title="CMake make">
+                <i class="fa fa-chevron-left"></i> CMake make
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/13/Raspberry Pi 3的安装设置/" rel="prev" title="RaspberryPi 3的安装配置">
+                RaspberryPi 3的安装配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/13/Raspberry Pi 3 + Raspbian Jessie + OpenCV 3/"
+           data-title="Raspberry Pi 3 + Raspbian Jessie + OpenCV 3" data-url="http://yoursite.com/2016/12/13/Raspberry Pi 3 + Raspbian Jessie + OpenCV 3/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Feng Han" />
+          <p class="site-author-name" itemprop="name">Feng Han</p>
+          <p class="site-description motion-element" itemprop="description">happy ending is mine</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/robocoderhan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/robocoder" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://cs.nju.edu.cn/rinc/" title="南京大学机器人智能与神经计算研究组" target="_blank">南京大学机器人智能与神经计算研究组</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展文件系统"><span class="nav-number">1.</span> <span class="nav-text">扩展文件系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装依赖环境"><span class="nav-number">2.</span> <span class="nav-text">安装依赖环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载OpenCv源码"><span class="nav-number">3.</span> <span class="nav-text">下载OpenCv源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-2-7或Python-2？"><span class="nav-number">4.</span> <span class="nav-text">Python 2.7或Python 2？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译安装OpenCv"><span class="nav-number">5.</span> <span class="nav-text">编译安装OpenCv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装最后"><span class="nav-number">6.</span> <span class="nav-text">安装最后</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证是否安装正确"><span class="nav-number">7.</span> <span class="nav-text">验证是否安装正确</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Feng Han</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"robocoder"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Ea0AXcUM562zyefWNdI6tLNl-gzGzoHsz", "VJPpUmHBM9Uhvu2MhW4FAe2T");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

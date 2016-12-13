@@ -1,0 +1,884 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="RaspberryPi," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="我的环境是Raspberry Pi 3 + raspbian-jessie(RASPBIAN JESSIE WITH PIXEL)，硬件环境和系统环境不同所以一些配置实用也会不同，在wifi和蓝牙配置使用上有不同，我就是按着老的教程修改了蓝牙的配置，导致板载的蓝牙检测不到了，就需要重新装系统。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RaspberryPi 3的安装配置">
+<meta property="og:url" content="http://yoursite.com/2016/12/13/Raspberry Pi 3的安装设置/index.html">
+<meta property="og:site_name" content="RoboCoder">
+<meta property="og:description" content="我的环境是Raspberry Pi 3 + raspbian-jessie(RASPBIAN JESSIE WITH PIXEL)，硬件环境和系统环境不同所以一些配置实用也会不同，在wifi和蓝牙配置使用上有不同，我就是按着老的教程修改了蓝牙的配置，导致板载的蓝牙检测不到了，就需要重新装系统。">
+<meta property="og:updated_time" content="2016-12-13T10:06:54.094Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RaspberryPi 3的安装配置">
+<meta name="twitter:description" content="我的环境是Raspberry Pi 3 + raspbian-jessie(RASPBIAN JESSIE WITH PIXEL)，硬件环境和系统环境不同所以一些配置实用也会不同，在wifi和蓝牙配置使用上有不同，我就是按着老的教程修改了蓝牙的配置，导致板载的蓝牙检测不到了，就需要重新装系统。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/13/Raspberry Pi 3的安装设置/"/>
+
+
+
+
+
+  <title> RaspberryPi 3的安装配置 | RoboCoder </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?988adeeed387deb1163635dd055a6603";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">RoboCoder</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/13/Raspberry Pi 3的安装设置/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Feng Han">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="RoboCoder">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="RoboCoder" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                RaspberryPi 3的安装配置
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/12/13/Raspberry Pi 3的安装设置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/13/Raspberry Pi 3的安装设置/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/13/Raspberry Pi 3的安装设置/" class="leancloud_visitors" data-flag-title="RaspberryPi 3的安装配置">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">Visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我的环境是Raspberry Pi 3 + raspbian-jessie(RASPBIAN JESSIE WITH PIXEL)，硬件环境和系统环境不同所以一些配置实用也会不同，在wifi和蓝牙配置使用上有不同，我就是按着老的教程修改了蓝牙的配置，导致板载的蓝牙检测不到了，就需要重新装系统。</p>
+<a id="more"></a>
+<h2 id="安装Raspbian系统"><a href="#安装Raspbian系统" class="headerlink" title="安装Raspbian系统"></a>安装Raspbian系统</h2><p>在开始安装Raspbian之前，需要先下载<a href="https://www.raspberrypi.org/downloads/raspbian/" target="_blank" rel="external">Raspbian</a>镜像文件，<strong>新手或者对Linux系统不熟悉的最好不要用<code>lite</code>版</strong>。同时你还需要下载<a href="https://sourceforge.net/projects/win32diskimager/" target="_blank" rel="external">Win32 Disk Imager</a>。两个软件都下载完后，解压Win32 Disk Imager，将SD卡插入到读卡器中。运行此工具，选择正确的驱动盘符，然后点击文件图标进行浏览，选择你刚才下载的最新的Raspbian镜像文件。开始进行安装，点击Write，然后等待。当此过程结束时你会看到一个结束的提示框。到此，你的树莓派就已经安装好了！</p>
+<h2 id="第一次进入"><a href="#第一次进入" class="headerlink" title="第一次进入"></a>第一次进入</h2><p>使用树莓派的方式有很多种：</p>
+<ul>
+<li>树莓派+外接显示器</li>
+<li>树莓派+WiFi+SSH+VNC</li>
+<li>树莓派+网线+SSH</li>
+<li>…</li>
+</ul>
+<p>我使用的方式是第二种，但是第一次你需要先登录一次WiFi才可以，因为Raspberry Pi 3板载了WiFi模块，所以设置很简便，HDMI接口外接一个显示器，再加外接键盘、外接鼠标，通电以后就会有界面显示，点击WiFi图标，连接你笔记本发的WiFi。Windows可以用<a href="http://wifi.liebao.cn/" target="_blank" rel="external">猎豹免费WiFi</a>软件，这种情况下可以通过将鼠标放在猎豹WiFi的你的用户名上看到分给Raspberry Pi的IP地址；Ubuntu系统可以参考这个<a href="http://jingyan.baidu.com/article/363872ecd8f35d6e4ba16f97.html" target="_blank" rel="external">ubuntu14.10建立热点wifi</a>，Ubuntu系统查看分给Raspberry Pi的IP的方法是，终端中输入<code>sudo apt-get install nmap</code>，然后用<code>nmap -v -sP 10.42.0.0/24</code>命令查看分配的IP地址。</p>
+<p>当获得了，笔记本分配给Raspberry Pi的IP以后，就可以彻底解放它了，再也不需要外接任何东西了。不过这个过程中可能会遇到以下问题：</p>
+<ul>
+<li>外接显示器不显示东西</li>
+</ul>
+<p><em>新的raspbian系统好像不会有这个问题了。</em></p>
+<p>可以<a href="">如何解决树莓派B+使用HDMI转VGA线点不亮屏幕</a>中的方式尝试解决，在将SD卡插入Raspberry Pi之前，修改SD卡目录中的<code>config.txt</code>文件，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">#强制使用HDMI输出</div><div class="line">hdmi_force_hotplug=1</div><div class="line">#HDMI信号增强</div><div class="line">config_hdmi_boost=4</div><div class="line">#HDMI输出适配于计算机显示器</div><div class="line">hdmi_group=2</div><div class="line">#HDMI输出的分辨率及刷新频率</div><div class="line">hdmi_mode=9</div><div class="line">#禁止树莓派检测显示器分辨率，直接使用配置文件中制定的分辨率输出</div><div class="line">hdmi_ignore_edid=0xa5000080</div><div class="line">#禁止黑边</div><div class="line">disable_overscan=1</div><div class="line">start_x=1</div><div class="line">gpu_mem=128</div></pre></td></tr></table></figure>
+<ul>
+<li>没有外接显示器，使用的不是Raspberry Pi 3</li>
+</ul>
+<p>参考以下博文：</p>
+<p><a href="http://shumeipai.nxez.com/2013/10/15/raspberry-pi-and-a-network-cable-directly-connected-laptop.html" target="_blank" rel="external">树莓派+一根网线直连笔记本电脑</a></p>
+<p><a href="http://blog.csdn.net/kongdefei5000/article/details/18518777/" target="_blank" rel="external">树莓派-上手体验</a></p>
+<p><a href="http://blog.csdn.net/xdw1985829/article/details/38817195" target="_blank" rel="external">树莓派开发系列教程4——树莓派网络与更新配置（有线、无线）</a></p>
+<p><a href="https://www.embbnux.com/2015/02/08/setup_raspberry_to_wifi_access_point_with_rtl8188/" target="_blank" rel="external">利用USB网卡配置树莓派为无线热点</a></p>
+<p><a href="https://www.embbnux.com/2016/04/10/raspberry_pi_3_wifi_and_bluetooth_setting_on_console/" target="_blank" rel="external">树莓派3命令行配置wifi无线连接和蓝牙连接</a></p>
+<p><del>如果是Raspberry Pi 3而且系统用的是RASPBIAN JESSIE WITH PIXEL版，外接显示器都不需要，可以直接在SD卡中的/boot目录下wpa_supplicant.conf文件中添加以下内容即可：</del></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">network=&#123;</div><div class="line">        ssid=&quot;你的WiFi名&quot;</div><div class="line">        psk=&quot;你的WiFi密码&quot;</div><div class="line">        key_mgmt=WPA-PSK</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="SSH登陆树莓派"><a href="#SSH登陆树莓派" class="headerlink" title="SSH登陆树莓派"></a>SSH登陆树莓派</h2><p>Windows下SSH推荐使用<a href="http://mobaxterm.mobatek.net/download.html" target="_blank" rel="external">MobaXterm</a>，它兼具了FTP等很多功能，也可以使用<a href="http://www.putty.org/" target="_blank" rel="external">PuTTY</a>。装好以后用分给树莓派的IP地址就能登陆。登陆以后会让输入用户名和密码，Raspbian系统默认的用户名是<em>pi</em>，密码是<em>raspberry</em>。</p>
+<p>Ubuntu直接在终端中输入<code>ssh pi@[分配给树莓派的IP地址]</code>，然后输入密码就可以了。Ubuntu下的FTP推荐使用FileZila。</p>
+<h2 id="VNC登陆树莓派"><a href="#VNC登陆树莓派" class="headerlink" title="VNC登陆树莓派"></a>VNC登陆树莓派</h2><p>SSH登陆只能在命令行环境中使用，使用VNC可以直接在笔记本上登陆Raspberry Pi的桌面环境。</p>
+<p>Windows下推荐使用<a href="https://www.realvnc.com/download/viewer/" target="_blank" rel="external">VNC-Viewer</a>，Ubuntu下可以直接使用系统自带的Remmina。</p>
+<p>然后需要先在SSH环境下为树莓派安装VNC服务器端程序并设置VNC的密码（不是Raspberry Pi的密码）：</p>
+<pre><code>sudo apt-get install tightvncserver
+vncpasswd
+</code></pre><p>树莓派启动VNC服务：</p>
+<pre><code>sudo tightvncserver :1
+</code></pre><p><code>1</code>表示VNC窗口号，可以开多个VNC服务，一般使用第1个，缺省的话默认使用0号，一般不用。</p>
+<p>然后笔记本通过VNC-Viewer或者Remmina使用<code>[树莓派IP]:1</code>的方式就可以登陆了。</p>
+<p>树莓派输入<code>sudo tightvncserver -kill :1</code>命令结束VNC服务。</p>
+<h2 id="基本设置"><a href="#基本设置" class="headerlink" title="基本设置"></a>基本设置</h2><ul>
+<li><p>输入<code>sudo raspi-config</code>进行一些基本的设置，设置第一项expand filesystem，设置第四项internationalisation options，进入后选change_locale，空格键表示打勾或去掉勾，去掉en_GB.UTF-8，选上en_US.UTF-8，zh_CN.UTF-8，zh_CN.GBK，按TAB键切换到OK。</p>
+</li>
+<li><p><a href="http://shumeipai.nxez.com/2016/03/13/how-to-make-raspberry-pi-display-chinese.html" target="_blank" rel="external">如何让树莓派显示中文</a></p>
+</li>
+<li><p>更换软件源</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /etc/apt</div><div class="line">cp sources.list sources.list_back</div><div class="line"><span class="comment"># 修改</span></div><div class="line">sudo nano sources.list</div><div class="line"><span class="comment"># 【wheezy版本】修改为：deb http://mirrors.neusoft.edu.cn/raspbian/raspbian wheezy main contrib non-free rpi</span></div><div class="line"><span class="comment"># 【jessie版本】修改为：deb http://mirrors.neusoft.edu.cn/raspbian/raspbian jessie main contrib non-free rpi</span></div><div class="line"><span class="comment"># 更新软件源</span></div><div class="line">sudo apt-get update</div><div class="line"><span class="comment"># 更新软件</span></div><div class="line">sudo apt-get upgrade</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RaspberryPi/" rel="tag"># RaspberryPi</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/13/Raspberry Pi 3 + Raspbian Jessie + OpenCV 3/" rel="next" title="Raspberry Pi 3 + Raspbian Jessie + OpenCV 3">
+                <i class="fa fa-chevron-left"></i> Raspberry Pi 3 + Raspbian Jessie + OpenCV 3
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/13/Raspberry Pi 3蓝牙/" rel="prev" title="Raspberry Pi 3蓝牙">
+                Raspberry Pi 3蓝牙 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/13/Raspberry Pi 3的安装设置/"
+           data-title="RaspberryPi 3的安装配置" data-url="http://yoursite.com/2016/12/13/Raspberry Pi 3的安装设置/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Feng Han" />
+          <p class="site-author-name" itemprop="name">Feng Han</p>
+          <p class="site-description motion-element" itemprop="description">happy ending is mine</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/robocoderhan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/robocoder" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://cs.nju.edu.cn/rinc/" title="南京大学机器人智能与神经计算研究组" target="_blank">南京大学机器人智能与神经计算研究组</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Raspbian系统"><span class="nav-number">1.</span> <span class="nav-text">安装Raspbian系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一次进入"><span class="nav-number">2.</span> <span class="nav-text">第一次进入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH登陆树莓派"><span class="nav-number">3.</span> <span class="nav-text">SSH登陆树莓派</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VNC登陆树莓派"><span class="nav-number">4.</span> <span class="nav-text">VNC登陆树莓派</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本设置"><span class="nav-number">5.</span> <span class="nav-text">基本设置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Feng Han</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"robocoder"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Ea0AXcUM562zyefWNdI6tLNl-gzGzoHsz", "VJPpUmHBM9Uhvu2MhW4FAe2T");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
